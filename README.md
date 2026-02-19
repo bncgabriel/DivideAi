@@ -247,7 +247,7 @@ Garante que qualquer pessoa consiga rodar o projeto com um único comando, sem s
 
 ## 👨‍💻 Autores
 
-Feito por **[Gabriel Benicio](https://github.com/seu-usuario)** e **[Manuela Aimê](https://github.com/seu-usuario)**
+Feito por **[Gabriel Benicio](https://github.com/bncgabriel)** e **[Manuela Aimê](https://github.com/manuelaaime)**
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-gabriel--benicio-blue?style=flat-square&logo=linkedin)](https://linkedin.com/in/gabriel-benicioo)
 [![GitHub](https://img.shields.io/badge/GitHub-bcngabriel-black?style=flat-square&logo=github)](https://github.com/bncgabriel)
