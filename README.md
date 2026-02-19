@@ -3,7 +3,7 @@
 > Divida despesas com amigos e grupos de forma simples, transparente e sem complicação.
 
 ![Java](https://img.shields.io/badge/Java-21-orange?style=flat-square&logo=openjdk)
-![Spring Boot](https://img.shields.io/badge/Spring_Boot-3.x-green?style=flat-square&logo=springboot)
+![Spring Boot](https://img.shields.io/badge/Spring_Boot-4.x-green?style=flat-square&logo=springboot)
 ![React](https://img.shields.io/badge/React-18-blue?style=flat-square&logo=react)
 ![Docker](https://img.shields.io/badge/Docker-Compose-blue?style=flat-square&logo=docker)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-15-blue?style=flat-square&logo=postgresql)
