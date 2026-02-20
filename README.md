@@ -171,8 +171,14 @@ cd divideai
 cp .env.example .env
 # Edite o .env com suas configurações
 
-# 3. Suba todos os containers
-docker compose up --build
+# 3. Faça o deploy via script (Linux/macOS)
+./deploy.sh
+
+# ou no Windows (PowerShell)
+./deploy.ps1
+
+# alternativa direta com Docker Compose
+docker compose up -d --build
 
 # 4. Acesse a aplicação
 # Frontend: http://localhost
@@ -197,7 +203,7 @@ JWT_SECRET=seu_jwt_secret_aqui
 JWT_EXPIRATION=86400000
 
 # Frontend
-VITE_API_URL=http://localhost:8080
+VITE_API_URL=/api
 ```
 
 ---

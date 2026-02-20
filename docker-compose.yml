@@ -1,0 +1,51 @@
+services:
+  db:
+    image: postgres:15-alpine
+    container_name: divideai-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-divideai}
+      POSTGRES_USER: ${POSTGRES_USER:-divideai_user}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-divideai_password}
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-divideai_user} -d ${POSTGRES_DB:-divideai}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  back:
+    build:
+      context: ./back
+      dockerfile: Dockerfile
+    container_name: divideai-back
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/${POSTGRES_DB:-divideai}
+      SPRING_DATASOURCE_USERNAME: ${POSTGRES_USER:-divideai_user}
+      SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD:-divideai_password}
+      SERVER_PORT: 8080
+    ports:
+      - "8080:8080"
+
+  front:
+    build:
+      context: ./front
+      dockerfile: Dockerfile
+      args:
+        VITE_API_URL: ${VITE_API_URL:-/api}
+    container_name: divideai-front
+    restart: unless-stopped
+    depends_on:
+      - back
+    ports:
+      - "80:80"
+
+volumes:
+  pgdata:
