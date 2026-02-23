@@ -35,7 +35,7 @@ Projeto desenvolvido para portfólio com foco em boas práticas de desenvolvimen
 
 | Camada | Tecnologia |
 |---|---|
-| Frontend | React 18, Vite, TailwindCSS, Recharts |
+| Frontend | React 19, Vite, React Router DOM, CSS |
 | Backend | Java 17, Spring Boot 3, Spring Security, JPA |
 | Banco de dados | PostgreSQL 15 |
 | Autenticação | JWT (JSON Web Token) |
@@ -50,25 +50,55 @@ Projeto desenvolvido para portfólio com foco em boas práticas de desenvolvimen
 ```
 divideai/
 ├── docker-compose.yml
-├── backend/
+├── back/
 │   ├── Dockerfile
-│   └── src/main/java/com/divideai/
-│       ├── auth/           # Login, registro, JWT
-│       ├── user/           # Entidade e serviços de usuário
-│       ├── group/          # Grupos e convites por link
-│       ├── expense/        # Despesas e divisão entre membros
-│       ├── payment/        # Registro de pagamentos
-│       ├── report/         # Geração de PDF e dados para gráficos
-│       └── config/         # Configurações de segurança e CORS
-└── frontend/
+│   └── src/main/java/br/com/divideai/api/
+│       └── ...             # API Spring Boot
+└── front/
     ├── Dockerfile
     └── src/
-        ├── pages/          # Telas da aplicação
+        ├── pages/          # Telas roteadas
         ├── components/     # Componentes reutilizáveis
-        ├── hooks/          # Custom hooks
-        ├── services/       # Chamadas à API (Axios)
-        └── context/        # Contexto global de autenticação
+        ├── data/           # Dados mock para UI
+        ├── utils/          # Utilitários (moeda/data)
+        ├── App.jsx         # Definição de rotas
+        └── main.jsx        # Bootstrap com BrowserRouter
 ```
+
+---
+
+## 🧭 Rotas Frontend
+
+Atualmente o frontend utiliza `react-router-dom` com as seguintes rotas:
+
+```txt
+/login
+/dashboard
+/groups
+/groups/:groupId
+/groups/:groupId/expense/new
+/settings
+```
+
+---
+
+## 🔄 Estado Atual do Frontend
+
+O frontend está em fase de interface e fluxo de navegação, com foco em UX e responsividade.
+
+- A navegação já está estruturada com `react-router-dom`
+- Parte dos dados ainda está mockada em `front/src/data`
+- O projeto já está organizado para evolução gradual sem reescrita total
+
+### Estrutura alvo para integração de API
+
+Na próxima etapa, a aplicação seguirá esta organização:
+
+- `services/` para chamadas HTTP (Axios/fetch)
+- `context/` para sessão/autenticação (JWT e usuário logado)
+- `hooks/` para regras reutilizáveis (`useAuth`, `useGroups`, `useGroupDetails`, etc.)
+
+Isso permite trocar os mocks por chamadas reais de forma incremental, tela por tela.
 
 ---
 
@@ -212,23 +242,24 @@ VITE_API_URL=/api
 
 | Tela | Descrição |
 |---|---|
-| Dashboard | Visão geral dos grupos e saldo pessoal |
-| Grupo | Membros, despesas e balanço do grupo |
-| Adicionar Despesa | Formulário com seleção de quem divide |
-| Gráficos | Gastos por membro e por período |
-| Relatório PDF | Exportação completa do histórico |
+| Login | Acesso do usuário |
+| Dashboard | Visão geral dos grupos, saldo e atividades |
+| Meus Grupos | Listagem e busca dos grupos do usuário |
+| Detalhes do Grupo | Convite, código, membros e pagamentos |
+| Nova Despesa | Dialog para criação de despesa por grupo |
+| Configurações | Ajustes básicos de perfil e preferências |
 
 ---
 
 ## 📋 Roadmap
 
-- [x] Autenticação com JWT
-- [x] CRUD de grupos com convite por link
-- [x] Cadastro de despesas com divisão personalizada
-- [x] Algoritmo de simplificação de dívidas
-- [x] Histórico de pagamentos
-- [x] Gráficos de gastos
-- [x] Exportação de PDF
+- [x] UI base com rotas e páginas principais
+- [x] Layout responsivo (desktop e mobile)
+- [ ] Integração do frontend com API real (substituir mocks)
+- [ ] Contexto de autenticação (JWT) no frontend
+- [ ] Camada de services/hooks para consumo da API
+- [ ] CRUD completo de grupos e despesas integrado
+- [ ] Histórico de pagamentos integrado
 - [ ] Notificações por e-mail
 - [ ] Modo escuro
 - [ ] App mobile (React Native)
